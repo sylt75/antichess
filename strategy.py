@@ -58,12 +58,11 @@ while not (board.is_stalemate() or board.is_checkmate()):
                 print(mymove)
     
     if len(antichess_legal) == 0:
+        mymove = str(list(board.legal_moves)[0])
         for y in (list(board.legal_moves)):
         ## checks if the move puts king in check
             if board.gives_check(y) == True:
                 mymove = str(y)
-                break
-        mymove = str(list(board.legal_moves)[0])
 
     # output the move
     print_to_stdout(mymove)
