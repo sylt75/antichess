@@ -47,6 +47,8 @@ while not (board.is_stalemate() or board.is_checkmate()):
         ## determine piece being captured at that square (piece_type_at)
             bsquare = chess.parse_square(landing_pos)
             capvalue = board.piece_type_at(bsquare)
+            if capvalue == None:
+                capvalue = 1
         ## if piece type value is higher than maxvalue
             if capvalue > maxvalue:
                 maxvalue = capvalue
