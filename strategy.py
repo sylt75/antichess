@@ -39,10 +39,12 @@ while not (board.is_stalemate() or board.is_checkmate()):
     if len(antichess_legal) != 0:
         maxvalue = 0
         for x in (antichess_legal):
+        ## checks if the move puts king in check
+            if board.gives_check(x) == True:
+                mymove = str(x)
+                break
         ## determine the square the move lands on
             x = str(x)
-            print(x)
-            print(x[2:4])
             landing_pos = x[2:4]
         ## determine piece being captured at that square (piece_type_at)
             bsquare = chess.parse_square(landing_pos)
@@ -53,8 +55,14 @@ while not (board.is_stalemate() or board.is_checkmate()):
             if capvalue > maxvalue:
                 maxvalue = capvalue
                 mymove = x
+                print(mymove)
     
     if len(antichess_legal) == 0:
+        for y in (list(board.legal_moves)):
+        ## checks if the move puts king in check
+            if board.gives_check(y) == True:
+                mymove = str(y)
+                break
         mymove = str(list(board.legal_moves)[0])
 
     # output the move
