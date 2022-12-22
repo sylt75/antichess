@@ -17,14 +17,10 @@ while not (board.is_stalemate() or board.is_checkmate()):
 
     # our opponent made a move
     if not (first_move and player_type == "white"):
-        print("opponent player moving")
         opponent_move = input()
         board.push_san(opponent_move)
-        print(board)
-        print(board.legal_moves)
 
     # we make a move
-    print("us moving")
     def print_to_stdout(*a):
         print(*a, file=sys.stdout)
 
@@ -33,7 +29,6 @@ while not (board.is_stalemate() or board.is_checkmate()):
     for x in list(board.legal_moves):
         if board.is_capture(x) == True:
             antichess_legal.append(x)
-    print(antichess_legal)
     
     # strategy
     if len(antichess_legal) != 0:
@@ -55,7 +50,6 @@ while not (board.is_stalemate() or board.is_checkmate()):
             if capvalue > maxvalue:
                 maxvalue = capvalue
                 mymove = x
-                print(mymove)
     
     if len(antichess_legal) == 0:
         mymove = str(list(board.legal_moves)[0])
@@ -64,11 +58,10 @@ while not (board.is_stalemate() or board.is_checkmate()):
             if board.gives_check(y) == True:
                 mymove = str(y)
 
-    # output the move
-    print_to_stdout(mymove)
-
     # make the move on the board
     board.push_san(mymove)
-    print(board)
+
+    # output the move
+    print_to_stdout(mymove)
 
     first_move = False
