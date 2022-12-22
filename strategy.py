@@ -6,6 +6,7 @@ board = chess.Board()
 first_move = True # true since we're making our first move
 player_type = sys.argv[1]
 player_color = False
+mymove = ""
 
 if player_type == "white":
     player_color = True
@@ -52,7 +53,13 @@ while not (board.is_stalemate() or board.is_checkmate()):
                 mymove = x
     
     if len(antichess_legal) == 0:
+        prevmove = mymove
         mymove = str(list(board.legal_moves)[0])
+        
+        # prevents repeating moves
+        if (len(list(board.legal_moves)) > 1) and (prevmove[0:2] == mymove[2:4]):
+            mymove = str(list(board.legal_moves)[1])
+        
         for y in (list(board.legal_moves)):
         ## checks if the move puts king in check
             if board.gives_check(y) == True:
